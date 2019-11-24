@@ -1,0 +1,249 @@
+#: kivy 1.11.1
+
+<BackgroundColor@Widget>
+    background_color: 1, 1, 1, 1
+    canvas.before:
+        Color:
+            rgba: root.background_color
+        Rectangle:
+            size: self.size
+            pos: self.pos
+
+<BackgroundLabel@Label+BackgroundColor>
+    background_color: 0, 0, 0, 0
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Batal"
+                on_release: root.cancel()
+
+            Button:
+                text: "Pilih"
+                on_release: root.load(filechooser.selection)
+
+<RuleDialog>:
+    text_input: text_input
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+
+        TextInput:
+            id: text_input
+            multiline: True
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Kembali"
+                on_release: root.cancel()
+
+Kbs:
+    rows:2
+    sourceimage: source_image
+    resultimage: resultimage
+    goal: btn
+    detectresult: detectresult
+    matchfacts: matchfacts
+    hitrules: hitrules
+    GridLayout:
+        cols:3
+        GridLayout:
+            rows:2
+            BackgroundLabel:
+                text: "Gambar Sumber"
+                size_hint: (1, .10)
+                color: (0,0,0,1)
+                background_color: (1, 1, 1, 1)
+            Image:
+                id: source_image
+                source: 'defaultImg.jpg'
+        GridLayout:
+            rows:2
+            Label:
+                text: "Gambar Hasil Deteksi"
+                size_hint: (1, .10)
+            Image:
+                id: resultimage
+                source: 'defaultImg.jpg'
+        GridLayout:
+            rows:2
+            GridLayout:
+                rows:2
+                Button:
+                    id: btn1
+                    text: 'Buka Gambar'
+                    on_release: root.show_load()
+                Button:
+                    id: btn2
+                    text: 'Buka Rules'
+                    on_release: root.show_rule()
+            GridLayout:
+                cols:1
+
+                Button:
+                    id: btn
+                    text: 'Bentuk Dasar'
+                    on_release: dropdown.open(self)
+
+                Widget:
+                    on_parent: dropdown.dismiss()
+
+                DropDown:
+
+                    id: dropdown
+                    on_select: btn.text = args[1]
+
+                    Button:
+                        text: 'Segitiga lancip'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga lancip')
+                        on_release: root.get_result('Segitiga lancip')
+
+                    Button:
+                        text: 'Segitiga tumpul'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga tumpul')
+                        on_release: root.get_result('Segitiga tumpul')
+
+
+                    Button:
+                        text: 'Segitiga siku-siku'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga siku-siku')
+                        on_release: root.get_result('Segitiga siku-siku')
+
+                    Button:
+                        text: 'Segitiga sama kaki dan siku-siku'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga sama kaki dan siku-siku')
+                        on_release: root.get_result('Segitiga sama kaki dan siku-siku')
+
+                    Button:
+                        text: 'Segitiga sama kaki dan tumpul'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga sama kaki dan tumpul')
+                        on_release: root.get_result('Segitiga sama kaki dan tumpul')
+
+                    Button:
+                        text: 'Segitiga sama kaki dan lancip'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga sama kaki dan lancip')
+                        on_release: root.get_result('Segitiga sama kaki dan lancip')
+
+                    Button:
+                        text: 'Segitiga sama sisi'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segitiga sama sisi')
+                        on_release: root.get_result('Segitiga sama sisi')
+
+                    Button:
+                        text: 'Segiempat beraturan'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segiempat beraturan')
+                        on_release: root.get_result('Segiempat beraturan')
+
+                    Button:
+                        text: 'Segiempat berbentuk layang-layang'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segiempat berbentuk layang-layang')
+                        on_release: root.get_result('Segiempat berbentuk layang-layang')
+
+                    Button:
+                        text: 'Trapezium sama kaki'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Trapezium sama kaki')
+                        on_release: root.get_result('Trapezium sama kaki')
+
+                    Button:
+                        text: 'Trapezium rata kanan'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Trapezium rata kanan')
+                        on_release: root.get_result('Trapezium rata kanan')
+
+                    Button:
+                        text: 'Trapezium rata kiri'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Trapezium rata kiri')
+                        on_release: root.get_result('Trapezium rata kiri')
+
+                    Button:
+                        text: 'Segi lima sama sisi'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segi lima sama sisi')
+                        on_release: root.get_result('Segi lima sama sisi')
+
+                    Button:
+                        text: 'Segi enam sama sisi'
+                        size_hint_y: None
+                        height: '48dp'
+                        on_release: dropdown.select('Segi enam sama sisi')
+                        on_release: root.get_result('Segi enam sama sisi')
+
+    GridLayout:
+        cols:3
+        GridLayout:
+            rows:2
+            BackgroundLabel:
+                text: 'Hasil Deteksi'
+                size_hint: (1, .10)
+                background_color: (255, 0, 0, 1)
+            BackgroundLabel:
+                id: detectresult
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: "center"
+                text: ''
+                color: (0,0,0,1)
+                background_color: (1, 1, 1, 1)
+        GridLayout:
+            rows:2
+            BackgroundLabel:
+                text: 'Fakta yang sesuai'
+                background_color: (0, 255, 0, 1)
+                size_hint: (1, .10)
+            BackgroundLabel:
+                id: matchfacts
+                text: ''
+                text_size: self.width, None
+                height: self.texture_size[1]
+                color: (0,0,0,1)
+                background_color: 1, 1, 1, 1
+        GridLayout:
+            rows:2
+            BackgroundLabel:
+                text: 'Rule yang teraktivasi'
+                background_color: (0,0,255,1)
+                size_hint: (1, .10)
+            BackgroundLabel:
+                id: hitrules
+                text_size: self.width, None
+                height: self.texture_size[1]
+                halign: "center"
+                text: ''
+                color: (0,0,0,1)
+                background_color: 1, 1, 1, 1
